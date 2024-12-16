@@ -1,5 +1,5 @@
 <?php 
-session_start();  // Démarre la session
+session_start();  // Démarre la session m
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
