@@ -6,6 +6,27 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $nom_utilisateur = $_SESSION['nom_utilisateur']; 
 }
 
+// Connexion à la base de données
+try {
+    $pdo = new PDO("mysql:host=localhost;dbname=messagerie", "root", ""); // Modifier les identifiants
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
+}
+
+// Récupérer les 5 derniers messages pour l'utilisateur connecté
+$messages = [];
+if (isset($nom_utilisateur)) {
+    $stmt = $pdo->prepare("SELECT sender, message, timestamp 
+                           FROM messages 
+                           WHERE receiver = ? 
+                           ORDER BY timestamp DESC 
+                           LIMIT 5");
+    $stmt->execute([$nom_utilisateur]);
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 // Tableau des chemins des images d'annonces
 $annonces = [
     "image_annonces_7.png",
@@ -31,16 +52,16 @@ $annonces = [
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 images par ligne */
-            gap: 20px; /* Espacement entre les images */
+            gap: 30px; /* Espacement entre les images */
             justify-items: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .grid-container img {
             width: 220px;
             height: 220px;
             object-fit: cover;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
@@ -82,8 +103,8 @@ $annonces = [
 
             <div class="flex1 flex auth-links">
                 <div>
-                    <img src= "information.png" class="width30" />
-                    <span class="rightText">Messagerie</span>
+                    <img src="information.png" class="width30" />
+                    <a href="messagerie.php" class="rightText">Messagerie</>
                 </div>
 
                 <div>
@@ -93,8 +114,11 @@ $annonces = [
 
                 <div>
                     <img src="inscription.png" class="width30" />
-                    <a href="page_inscription.html" class="rightText">Inscription</a>
+                    <a href="page_inscription.php" class="rightText">Inscription</a>
                 </div>
+
+
+
             </div>
         </div>
 
@@ -106,6 +130,23 @@ $annonces = [
                 </div>
             <?php endif; ?>
         </div>
+
+<!-- Section des messages récents -->
+<?php if (isset($nom_utilisateur) && !empty($messages)): ?>
+    <div class="messages-container">
+        <h3>Vos messages récents</h3>
+        <?php foreach ($messages as $msg): ?>
+            <div class="message-box">
+                <p><strong>De : <?php echo htmlspecialchars($msg['sender']); ?></strong></p>
+                <p><?php echo nl2br(htmlspecialchars($msg['message'])); ?></p>
+                <small><?php echo htmlspecialchars($msg['timestamp']); ?></small>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php elseif (isset($nom_utilisateur)): ?>
+    <p>Aucun message pour le moment.</p>
+<?php endif; ?>
+
 
         <!-- Section des annonces -->
         <div class="grid-container">
