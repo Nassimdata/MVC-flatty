@@ -1,0 +1,36 @@
+.image-wrapper {
+    position: relative;
+    width: 150px;
+    /* Même largeur que les images */
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    /* Hauteur du fond beige au-dessus de l'image */
+    background-color: beige;
+    border-top-left-radius: 8px;
+    /* Pour arrondir les coins */
+    border-top-right-radius: 8px;
+}
+
+.grid-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.grid-container img:hover {
+    transform: scale(1.05);
+}
