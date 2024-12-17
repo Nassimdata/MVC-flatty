@@ -42,7 +42,7 @@ body {
     top: 40px;
     left: 0;
     background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
 }
@@ -123,4 +123,32 @@ body {
 .auth-links div a {
     text-decoration: none;
     color: black;
+}
+
+.annonce-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permet aux éléments de passer à la ligne */
+    gap: 20px;
+    /* Espacement entre les annonces */
+    justify-content: center;
+    /* Centrer les annonces horizontalement */
+}
+
+.annonce-image {
+    width: 300px;
+    /* Largeur des images d'annonces */
+    height: 200px;
+    /* Hauteur des images */
+    object-fit: cover;
+    /* Ajuste l'image sans déformation */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.annonce-image:hover {
+    transform: scale(1.05);
+    /* Effet d'agrandissement au survol */
 }

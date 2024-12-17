@@ -1,10 +1,23 @@
 <?php 
-session_start();  // Démarre la session m
+session_start();  // Démarre la session
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $nom_utilisateur = $_SESSION['nom_utilisateur']; 
 }
+
+// Tableau des chemins des images d'annonces
+$annonces = [
+    "image_annonces_7.png",
+    "image_annonces_2.png",
+    "image_annonces_3.png",
+    "image_annonces_4.png",
+    "image_annonces_5.png",
+    "image_annonces_6.png",
+    "image_annonces_1.png",
+    "image_annonces_8.png",
+    "image_annonces_9.png"
+];
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +27,27 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="page_accueil.css">
     <title>Page d'Accueil</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 images par ligne */
+            gap: 20px; /* Espacement entre les images */
+            justify-items: center;
+            margin-top: 20px;
+        }
+        .grid-container img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .grid-container img:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +56,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             <div class="flex1 flex">
                 <div class="menu">
                     <div onclick="toggleMenu()">
-                        <img src="C:\xampp\htdocs\FLATTY\simg\menu.png" class="menuImage" />
+                        <img src="menu.png" class="menuImage" />
                     </div>
                     <div class="menu-content" id="menuContent">
                         <a href="#">Categories appartements</a>
@@ -48,7 +82,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
             <div class="flex1 flex auth-links">
                 <div>
-                    <img src="file:///C:/Users/tayab/MVC%20Flaty/vue/page_accueil.html" class="width30" />
+                    <img src= "information.png" class="width30" />
                     <span class="rightText">Messagerie</span>
                 </div>
 
@@ -58,10 +92,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 </div>
 
                 <div>
-                    <img src="img/exit.png" class="width30" />
+                    <img src="inscription.png" class="width30" />
                     <a href="page_inscription.html" class="rightText">Inscription</a>
                 </div>
-
             </div>
         </div>
 
@@ -73,6 +106,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 </div>
             <?php endif; ?>
         </div>
+
+        <!-- Section des annonces -->
+        <div class="grid-container">
+            <?php foreach ($annonces as $annonce): ?>
+                <img src="<?php echo htmlspecialchars($annonce); ?>" alt="Annonce" />
+            <?php endforeach; ?>
+        </div>
+
+</div>
 
     </div>
 </body>
