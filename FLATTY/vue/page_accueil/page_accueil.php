@@ -57,8 +57,8 @@ $annonces = [
             margin-top: 30px;
         }
         .grid-container img {
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border: 1px solid #ddd;
             border-radius: 10px;

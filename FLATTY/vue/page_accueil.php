@@ -29,13 +29,13 @@ if (isset($nom_utilisateur)) {
 
 // Tableau des chemins des images d'annonces
 $annonces = [
-    "image_annonces_7.png",
+    "image_annonces_1.png",
     "image_annonces_2.png",
     "image_annonces_3.png",
     "image_annonces_4.png",
     "image_annonces_5.png",
     "image_annonces_6.png",
-    "image_annonces_1.png",
+    "image_annonces_7.png",
     "image_annonces_8.png",
     "image_annonces_9.png"
 ];
@@ -52,16 +52,16 @@ $annonces = [
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 images par ligne */
-            gap: 30px; /* Espacement entre les images */
+            row-gap: 30px; /* Espacement entre les images */
             justify-items: center;
-            margin-top: 30px;
+            margin-bottom: 2px;
         }
         .grid-container img {
-            width: 220px;
-            height: 220px;
+            width: 400px;
+            height: 250px;
             object-fit: cover;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border: 5px solid #ddd;
+            border-radius: 40px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
@@ -117,8 +117,6 @@ $annonces = [
                     <a href="page_inscription.php" class="rightText">Inscription</a>
                 </div>
 
-
-
             </div>
         </div>
 
@@ -147,16 +145,28 @@ $annonces = [
     <p>Aucun message pour le moment.</p>
 <?php endif; ?>
 
-
         <!-- Section des annonces -->
         <div class="grid-container">
             <?php foreach ($annonces as $annonce): ?>
-                <img src="<?php echo htmlspecialchars($annonce); ?>" alt="Annonce" />
+                <div class="annonce-item">
+    <img src="<?php echo htmlspecialchars($annonce); ?>" alt="Annonce" />
+    <div class="annonce-text">
+        <h3>Type de logement</h3>
+        <p>Localisation : Paris, France</p>
+        <p>Surface : 40m²</p>
+        <p>Nombre de lits : 2</p>
+        <p>Prix : Gratuit</p>
+               </div>
+        </div>
+
             <?php endforeach; ?>
         </div>
+    </div>
+</div>
 
 </div>
 
     </div>
 </body>
 </html>
+
