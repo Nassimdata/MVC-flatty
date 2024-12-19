@@ -52,16 +52,17 @@ $annonces = [
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 images par ligne */
-            row-gap: 30px; /* Espacement entre les images */
+            row-gap: 20px; /* Espacement entre les images */
             justify-items: center;
-            margin-bottom: 2px;
+            margin-bottom: 50px;
+            margin-top: 50px;
         }
         .grid-container img {
-            width: 400px;
+            width: 420px;
             height: 250px;
             object-fit: cover;
-            border: 5px solid #ddd;
-            border-radius: 40px;
+            border: 10px solid #ddd;
+            border-radius: 50px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
@@ -91,7 +92,7 @@ $annonces = [
             <div class="flex6">
                 <div class="search-container">
                     <input class="input" placeholder="Rechercher" />
-                    <img class="magnifierImage" src="magnifier.png" />
+                    <img class="magnifierImage" src="magnifier_recherche.png" />
                 </div>
                 <div class="tab">
                     <a href="page_accueil.html" class="width20">Page d'accueil</a>
@@ -129,21 +130,8 @@ $annonces = [
             <?php endif; ?>
         </div>
 
-<!-- Section des messages récents -->
-<?php if (isset($nom_utilisateur) && !empty($messages)): ?>
-    <div class="messages-container">
-        <h3>Vos messages récents</h3>
-        <?php foreach ($messages as $msg): ?>
-            <div class="message-box">
-                <p><strong>De : <?php echo htmlspecialchars($msg['sender']); ?></strong></p>
-                <p><?php echo nl2br(htmlspecialchars($msg['message'])); ?></p>
-                <small><?php echo htmlspecialchars($msg['timestamp']); ?></small>
-            </div>
-        <?php endforeach; ?>
-    </div>
-<?php elseif (isset($nom_utilisateur)): ?>
-    <p>Aucun message pour le moment.</p>
-<?php endif; ?>
+        <a href="messages_recents.php">Voir vos messages récents</a>
+
 
         <!-- Section des annonces -->
         <div class="grid-container">
